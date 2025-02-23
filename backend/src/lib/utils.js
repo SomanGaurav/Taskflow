@@ -17,3 +17,16 @@ export const tokenGenerate = (userId , res)=>{
 
     return token ; 
 }
+
+
+export const percentStatus = (subTasks) => {
+    let subTasksCount = 0 , subTaskCompleted = 0 ; 
+    subTasks.forEach(element => {
+        subTasksCount = subTasksCount + 1 ; 
+        if(element.subTaskStatus){
+            subTaskCompleted = subTaskCompleted + 1 ; 
+        }
+    });
+
+    return subTaskCompleted * 100 / subTasksCount ; 
+}

@@ -12,30 +12,33 @@ const taskSchema = new mongoose.Schema({
         default : "green" , 
     }, 
 
-    assignedTo : [{
-        type : mongoose.Schema.Types.ObjectId , 
-        ref : 'User' , 
-    }] , 
 
     subTasks : [{
-        type : {
-            subTask : String , 
-            subTaskStatus : Boolean , 
-            default : false , 
-        }
-    }] , 
+        _id : false , 
+        subTaskName: {
+            type: String,
+        },
+        subTaskStatus: {
+            type: Boolean,
+            default: false,
+        },
+    }], 
 
-    taskCompletion : {
+    taskProgress : {
         type : Number , 
         default : 0 , 
     }, 
 
     taskCreated : {
-        type : {
-            sessionNumber : Number , 
-            sessionDate : Date , 
-        } , 
-        required : true , 
+        sessionNumber: {
+            type: Number,
+            required: true,
+        },
+        sessionDate: {
+            type: Date,
+            required: true,
+        },
+         
     } , 
 
     taskDeadline : {
