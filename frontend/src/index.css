@@ -1,0 +1,11 @@
+@import "tailwindcss" ;
+
+
+:root{
+  --primary-dark : #131517 ; 
+  --secondary-dark : #1E1F25; 
+}
+
+.form-input {
+  @apply border-1 border-fuchsia-50 ml-[10%] rounded-xs my-3 text-fuchsia-50 indent-2  
+}
