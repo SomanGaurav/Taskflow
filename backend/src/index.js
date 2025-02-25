@@ -7,6 +7,7 @@ import cors from "cors";
 import { connectDb } from "./lib/db.js";
 import authRoutes from "./routes/auth.routes.js"
 import taskRoutes from "./routes/task.routes.js"
+import fileRoutes from "./routes/file.routes.js"
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000 ; 
 app.use(express.json()); 
@@ -19,6 +20,8 @@ app.use(cors({
 
 app.use("/api/auth" , authRoutes); 
 app.use("/api/task" , taskRoutes); 
+app.use("/api/file" ,fileRoutes ); 
+
 
 app.listen(PORT , ()=>{
     console.log(`Server running on port :- ${PORT}`); 
