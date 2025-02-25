@@ -36,8 +36,7 @@ export const createTask = async(req , res)=>{
             });
 
             console.log(assignedTo);
-            await usertaskRelation.insertMany(assignedTo);
-            usertaskRelation.save();  
+            await usertaskRelation.insertMany(assignedTo); 
             res.status(201).json(newTask); 
              
         }
@@ -65,10 +64,7 @@ export const readTask = async(req , res)=> {
                     relResponse[index] = element1.userId.toString() ; 
                 })
         
-            }
-            
-            // console.log(taskResponse);
-            
+            }            
             return res.status(200).json({message : "Sending all the tasks"})
         }
         
@@ -84,6 +80,35 @@ export const readTask = async(req , res)=> {
 
 
 export const updateStatusSubTask = async(req , res)=>{
-    const subTasks = req.body ; 
-    console.log(subTasks); 
+    try {
+        const reqBody = req.body ;  
+        
+        const taskResponse = await Task.findById("67bb21c34a4e227bf237dec7"); 
+        if(taskResponse){
+            taskResponse.subTasks = reqBody.subTasks ; 
+            const percentageStatus = percentStatus(reqBody.subTasks);
+            taskResponse.taskProgress = percentageStatus.toFixed(3); 
+            await taskResponse.save(); 
+            res.status(200).json({message : taskResponse});
+        }
+        else{
+            res.status(404).json({message : `No task found for the corresponding ID`}); 
+        }
+        
+    } catch (error) {
+        console.log(`Error in task update status :- ${error.message}`);
+        res.status(500).json({message : "Internal Server Error"});  
+    }
+}
+
+
+export const deleteTask = async(req , res)=>{
+    try {
+        const taskId = req.params.taskid ; 
+        const status = await Task.findByIdAndDelete(taskId); 
+        res.status(200).json({message : status}); 
+    } catch (error) {
+        console.log(`Error in task delete controller :- ${error.message}`); 
+        res.status(500).json({message : "Internal Server Error"}); 
+    }
 }
