@@ -8,5 +8,6 @@ Router.post("/create" , protectRoute , createTask);
 Router.get("/read" , protectRoute , readTask ); 
 Router.get("/read/:id" , protectRoute , readTask ); 
 Router.put("/updatestatus" , updateStatusSubTask); 
-Router.delete("/delete/:taskid" , protectRoute , deleteTask)
+Router.delete("/delete/:taskid" , protectRoute , deleteTask); 
+
 export default Router ; 
